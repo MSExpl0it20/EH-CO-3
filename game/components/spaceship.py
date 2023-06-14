@@ -5,7 +5,7 @@ from pygame.sprite import Sprite
 
 class Spaceship(Sprite):
     def __init__(self):
-        self.image = pygame.transform.scale(SPACESHIP, (60, 40))
+        self.image = pygame.transform.scale(SPACESHIP, (50, 40))
         self.rect = self.image.get_rect()
         self.rect.x = 520
         self.rect.y = 500
@@ -23,16 +23,14 @@ class Spaceship(Sprite):
             self.move_down()
     
     def move_left(self):
+        self.rect.x -= 10
         if self.rect.right < 0:
-            self.rect.x = SCREEN_WIDTH
-        else:
-            self.rect.x -= 10    
+            self.rect.x = SCREEN_WIDTH    
         
     def move_right(self):
+        self.rect.x  += 10
         if self.rect.left > SCREEN_WIDTH:
             self.rect.right = 0
-        else:
-            self.rect.x  += 10
   
     def move_up(self):   
         if self.rect.y > SCREEN_HEIGHT //2:
