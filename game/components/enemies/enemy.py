@@ -31,7 +31,7 @@ class Enemy(Sprite):
         self.speed_y = self.SPEED_Y
 
         self.movement = random.choice(self.MOVEMENTS)
-        self.move_x = random.randint(30, 100)
+        self.move_x = random.randint(30, 90)
         self.moving_index = 0
     
 
