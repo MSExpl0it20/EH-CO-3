@@ -1,3 +1,4 @@
+import pygame
 from game.components.bullets.bullet import Bullet
 from game.utils.constants import ENEMY_TYPE
 
@@ -11,8 +12,9 @@ class ballerManager:
         for bullet in self.enemy_bullets:
             bullet.update(self.enemy_bullets)
             if bullet.rect.colliderect(game.player.rect):
-                self.enemy_bullets.remove(self)
+                self.enemy_bullets.remove(bullet)
                 game.playing = False
+                pygame.display(2000)
                 break
 
     def draw(self, screen):
