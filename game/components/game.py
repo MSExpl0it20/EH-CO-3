@@ -34,15 +34,26 @@ class Game:
         pygame.quit()
 
     def events(self):
+        # for event in pygame.event.get():
+        #     if event.type == pygame.QUIT:
+        #         self.playing = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
+        self.input = pygame.key.get_pressed()
 
     def update(self):
         user_input = pygame.key.get_pressed()
-        self.player.update(user_input)
+        self.player.update(self.user_input)
+        # self.player.update(user_input)
+        self.player.update()
         self.enemy_manager.update(self)
         self.balletManager.update(self)
+        # self.balletManager.update(self.balletManager.enemy_bullets, self.input_state, self.enemy_manager.enemies)
+        # input_state = pygame.key.get_pressed()
+        # self.player.update(input_state)
+        # self.enemy_manager.update(self)
+        # self.balletManager.update(self, input_state)
         
 
     def draw(self):

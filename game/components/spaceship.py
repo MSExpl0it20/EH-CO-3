@@ -41,7 +41,6 @@ class Spaceship(Sprite):
         if self.rect.y < SCREEN_HEIGHT -50:
             self.rect.y += 10
 
-
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
         
