@@ -40,6 +40,7 @@
 #             if self.rect.colliderect(enemy.rect):
 #                 enemies.remove(enemy)
 #                 bullets.remove(self)
+
 import pygame
 from pygame.sprite import Sprite
 

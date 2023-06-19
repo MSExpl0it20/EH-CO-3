@@ -98,3 +98,8 @@ class Spaceship(Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
         
+    def set_image(self, size= (40, 60), image = SPACESHIP):
+        self.image = image
+        self.image = pygame.transform.scale(self.image, size)
+
+        

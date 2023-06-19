@@ -6,9 +6,9 @@ class Menu:
     HALF_SCREEN_HEIGHT = SCREEN_HEIGHT // 2
     HALF_SCREEN_WIDTH = SCREEN_WIDTH // 2
 
-    def __init__(self, message, text_size=35):
+    def __init__(self, message, text_size=25):
         self.font = pygame.font.Font(FONT_STYLE, text_size)
-        self.icon = pygame.transform.scale(ICON, (120, 80))
+        self.icon = pygame.transform.scale(ICON, (90, 80))
         self.icon_rect = self.icon.get_rect()
         self.icon_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT - 100)
         self.update_message(message)
@@ -22,7 +22,7 @@ class Menu:
                 on_start()
 
     def draw(self, screen):
-        screen.fill((255, 255, 255))
+        screen.fill((173,216,230))
         screen.blit(self.text, self.text_rect)
         screen.blit(self.icon, self.icon_rect)
         pygame.display.update()

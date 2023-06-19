@@ -36,7 +36,6 @@ from game.utils.constants import ENEMY_TYPE, SHIELD_TYPE
 
 class BalletManager:
     def __init__(self):
-        #self.bullets = list[Bullet] = []
         self.player_bullets = []
         self.enemy_bullets: list[Bullet] = []
 
@@ -44,7 +43,6 @@ class BalletManager:
         for bullet in self.enemy_bullets:
             bullet.update(self.enemy_bullets)
 
-            #Verificar si hemos chocado con el jugador
             if bullet.rect.colliderect(game.player.rect):
                 self.enemy_bullets.remove(bullet)
                 if game.player.power_up_type != SHIELD_TYPE:
@@ -56,7 +54,6 @@ class BalletManager:
         for bullet in self.player_bullets:
             bullet.update(self.player_bullets)
             
-            # Verificar si hemos golpeado a un enemigo
             for enemy in game.enemy_manager.enemies:
                 if bullet.rect.colliderect(enemy.rect):
                     game.enemy_manager.enemies.remove(enemy)
