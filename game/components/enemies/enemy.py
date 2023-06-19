@@ -232,15 +232,18 @@
 #             bullet = Bullet(self)
 #             bulletManager.add_bullet(bullet)
 #             self.shooting_time += random.randint(30, 50)
+
 import pygame
 import random
 from pygame.sprite import Sprite
 from game.components.bullets.bullet import Bullet
-from game.utils.constants import ENEMY_1, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import ENEMY_1, ENEMY_2, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
 
 
 LEFT = 'left'
-RIGHT = 'rigth'
+RIGHT = 'right'
+
+
 class Enemy(Sprite):
     MOVEMENTS = [LEFT, RIGHT]
     X_POS_LIST = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550]
@@ -250,9 +253,10 @@ class Enemy(Sprite):
 
     def __init__(self):
         self.image = pygame.transform.scale(ENEMY_1, (50, 50))
+        self.image1 = pygame.transform.scale(ENEMY_2, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = random.choice(self.X_POS_LIST)
-        self.rect.y = self.Y_POS    
+        self.rect.y = self.Y_POS
         self.type = ENEMY_TYPE
 
         self.speed_x = self.SPEED_X
@@ -275,7 +279,7 @@ class Enemy(Sprite):
         self.update_movement()
         if self.rect.y >= SCREEN_HEIGHT:
             ships.remove(self)
-    
+
     def update_movement(self):
         self.moving_index += 1
         if self.rect.x >= SCREEN_WIDTH - 50:
@@ -288,7 +292,10 @@ class Enemy(Sprite):
             self.movement = LEFT if self.movement == RIGHT else RIGHT
 
     def draw(self, screen):
-        screen.blit(self.image, (self.rect.x, self.rect.y))
+        if self.movement == LEFT:
+            screen.blit(self.image, (self.rect.x, self.rect.y))
+        else:
+            screen.blit(self.image1, (self.rect.x, self.rect.y))
 
     def shoot(self, bullet_manager):
         current_time = pygame.time.get_ticks()

@@ -5,9 +5,9 @@ from game.utils.constants import FONT_STYLE, ICON
 
 class LoseMenu(Menu):
 
-    def __init__(self, text_size=25):
+    def __init__(self, text_size=20):
         self.font = pygame.font.Font(FONT_STYLE, text_size)
-        self.icon = pygame.transform.scale(ICON, (115, 85))
+        self.icon = pygame.transform.scale(ICON, (80, 80))
         self.icon_rect = self.icon.get_rect()
         self.icon_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT - 100)
         self.message = ""
@@ -17,7 +17,7 @@ class LoseMenu(Menu):
         self.update_message("Press any key to restart")
 
     def draw(self, screen):
-        screen.fill((240, 255, 240))
+        screen.fill((176,196,222))
         screen.blit(self.text, self.text_rect)
         screen.blit(self.icon, self.icon_rect)
         if self.score_text:

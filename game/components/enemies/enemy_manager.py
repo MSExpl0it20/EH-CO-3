@@ -18,7 +18,8 @@
 #             enemy.draw(Screen)
         
 from game.components.enemies.enemy import Enemy
-from game.components.enemies.enemy2 import Enemy2
+# from game.utils.constants import ENEMY_2
+# from game.components.enemies.enemy import Enemy
 
 class EnemyManager:
     def __init__(self):
@@ -27,7 +28,7 @@ class EnemyManager:
     def update(self, game):
         if not self.enemies:
             self.enemies.append(Enemy())
-            self.enemies.append(Enemy2())
+            # self.enemies.append(ENEMY_2())
 
 
         for enemy in self.enemies:
