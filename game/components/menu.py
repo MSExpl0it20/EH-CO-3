@@ -18,15 +18,13 @@ class Menu:
         
         self.update_message(message)
 
-
-
     def event(self, on_close, on_start, user_input):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or user_input[pygame.K_RETURN]:
-                on_close()
-            elif event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN:
                 on_start()
-
+            elif event.type == pygame.QUIT or user_input[pygame.K_RETURN]:
+                on_close()
+           
 
 
     def draw (self, screen):
@@ -35,9 +33,6 @@ class Menu:
         screen.blit(self.text, self.text_rect)
         screen.blit(self.icon, self.icon_rect)
         pygame.display.update()
-
-    
-        
 
     def update_message(self, message):
         self.message = message

@@ -1,6 +1,6 @@
 import pygame
 
-from game.utils.constants import FONT_STYLE, GAME_OVER, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import FONT_STYLE, SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Pause:
 
@@ -14,16 +14,12 @@ class Pause:
         self.font_title_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT )
        
         self.font = pygame.font.Font(FONT_STYLE, 15)
-        self.options  = self.font.render("Press  [SPACE]  to Continue the Game  |  Press  [RETURN]  to Exit the Game", True, (255, 255, 0))
+        self.options  = self.font.render("Press  [SPACE]  to Continue the Game" , True, (255, 255, 0))
         self.options_rect = self.options.get_rect()
         self.options_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT + 150)
     
     def event(self, on_close, on_start):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.key == pygame.K_RETURN:
-                on_close()
-                pygame.quit()
-                quit()
             if event.key == pygame.K_SPACE:
                 on_start()
         
