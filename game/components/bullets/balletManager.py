@@ -30,41 +30,47 @@
 #         if bullet.owner == ENEMY_TYPE and not self.enemy_bullets:
 #             self.enemy_bullets.append(bullet)
 import pygame
-from game.components.bullets.bullet import Bullet
-from game.utils.constants import ENEMY_TYPE, SHIELD_TYPE
+from pygame.sprite import Sprite
+from game.components import bullets
 
+from game.utils.constants import BULLET, BULLET_ENEMY, ENEMY_TYPE, PLAYER_TYPE, SCREEN_HEIGHT
 
-class BalletManager:
-    def __init__(self):
-        self.player_bullets = []
-        self.enemy_bullets: list[Bullet] = []
+class Bullet(Sprite):
+    SPEED = 20
+    ENEMY_BULLET_IMG = pygame.transform.scale(BULLET_ENEMY, (9, 32))
+    PLAYER_BULLET_IMG = pygame.transform.scale(BULLET, (9, 32))
+    BULLETS = {ENEMY_TYPE: ENEMY_BULLET_IMG, PLAYER_TYPE: PLAYER_BULLET_IMG}
 
-    def update(self, game):
-        for bullet in self.enemy_bullets:
-            bullet.update(self.enemy_bullets)
+    def __init__(self, spaceship):
+        self.image = self.BULLETS[spaceship.type]
+        self.rect = self.image.get_rect()
+        self.rect.center = spaceship.rect.center
+        self.owner = spaceship.type
 
-            if bullet.rect.colliderect(game.player.rect):
-                self.enemy_bullets.remove(bullet)
-                if game.player.power_up_type != SHIELD_TYPE:
-                    game.playing = False
-                    game.death_count += 1
-                    pygame.time.delay(1000)
-                    break
+        self.shot_sound = pygame.mixer.Sound("game/assets/sound/blaster-2-81267.mp3")
+        self.enemy_death_sound = pygame.mixer.Sound("game/assets/sound/hq-explosion-6288.mp3")
 
-        for bullet in self.player_bullets:
-            bullet.update(self.player_bullets)
-            
-            for enemy in game.enemy_manager.enemies:
-                if bullet.rect.colliderect(enemy.rect):
-                    game.enemy_manager.enemies.remove(enemy)
-                    game.score += 1
-                    self.player_bullets.remove(bullet)
-                    
+    def update(self, bullets, enemies):
+        if self.owner == ENEMY_TYPE:
+            self.rect.y += self.SPEED 
+            if self.rect.y >= SCREEN_HEIGHT:
+                bullets.remove(self)
+        elif self.owner == PLAYER_TYPE:
+            self.rect.y -= self.SPEED
+            if self.rect.y < 0:
+                self.shot_sound.play()
+                bullets.remove(self) 
+
+            # Verificar colisiones con naves enemigas
+            for enemy in enemies:
+                if pygame.sprite.collide_rect(self, enemy):
+                    self.destroy()
+                    enemy.destroy()
 
     def draw(self, screen):
-        for bullet in self.enemy_bullets + self.player_bullets:
-            bullet.draw(screen)
+        screen.blit(self.image, (self.rect.x, self.rect.y))
 
-    def add_bullet(self, bullet):
-        if bullet.owner == ENEMY_TYPE and not self.enemy_bullets:
-            self.enemy_bullets.append(bullet)
+    def destroy(self):
+        if self.owner == PLAYER_TYPE:
+            self.enemy_death_sound.play()
+            bullets.remove(self)

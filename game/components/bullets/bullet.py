@@ -58,6 +58,7 @@ class Bullet(Sprite):
         self.rect.center = spaceship.rect.center
         self.owner = spaceship.type
 
+        self.shot_sound = pygame.mixer.Sound("game/assets/sounds/blaster-2-81267.mp3")
 
     def update(self, bullets):
         if self.owner == ENEMY_TYPE:
@@ -67,7 +68,10 @@ class Bullet(Sprite):
         elif self.owner == PLAYER_TYPE:
             self.rect.y -= self.SPEED
             if self.rect.y < 0:
+                self.shot_sound.play()
                 bullets.remove(self)
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
+
+
