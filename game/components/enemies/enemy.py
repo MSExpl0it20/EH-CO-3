@@ -236,7 +236,11 @@ import pygame
 import random
 from pygame.sprite import Sprite
 from game.components.bullets.bullet import Bullet
+<<<<<<< HEAD
 from game.components.bullets.bullet_manager import BulletManager
+=======
+from game.components.bullets.balletManager import BalletManager
+>>>>>>> ace02a7f1cb42439456c3080b17de4c781006881
 from game.utils.constants import ENEMY_1, ENEMY_2, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
 
 

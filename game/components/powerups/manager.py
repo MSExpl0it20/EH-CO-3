@@ -1,8 +1,5 @@
-# import random
-# import pygame
-# from game.components.powerups.shield import Shield
-# from game.utils.constants import SPACESHIP_SHIELD
 
+<<<<<<< HEAD
 # class Manager:
 #     def __init__(self):
 #         self.power_ups = []
@@ -40,6 +37,8 @@
 #         self.when_appears = random.randint(now + 10000, now + 15000)
 # ------------------------------------------------
 
+=======
+>>>>>>> ace02a7f1cb42439456c3080b17de4c781006881
 import random
 import pygame
 from game.components.powerups.shield import Shield

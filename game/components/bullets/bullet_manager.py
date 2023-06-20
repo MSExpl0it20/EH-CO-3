@@ -33,6 +33,7 @@ import pygame
 from game.components.bullets.bullet import Bullet
 from game.utils.constants import ENEMY_TYPE, SHIELD_TYPE, SPACESHIP_TYPE
 
+from game.utils.constants import BULLET, BULLET_ENEMY, ENEMY_TYPE, PLAYER_TYPE, SCREEN_HEIGHT
 
 class BulletManager:
 
